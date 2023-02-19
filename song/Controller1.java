@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -91,29 +93,34 @@ public class Controller1 {
     @FXML
     void deleteInfo(MouseEvent event) {
         if(!obsList.isEmpty()){
-            int selectedIndex = listView.getSelectionModel().getSelectedIndex();
-            obsList.remove(selectedIndex);
-            listView.getSelectionModel().select(selectedIndex);
-            if(selectedIndex == 0 && obsList.size() ==0){
-                 info.setText("No info");    
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setContentText("Do you want to make this change?");
+            Optional <ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+                obsList.remove(selectedIndex);
+                listView.getSelectionModel().select(selectedIndex);
+                if(selectedIndex == 0 && obsList.size() ==0){
+                        info.setText("No info");    
+                }
+                else{
+                    String content = "Song Name: " + listView.getSelectionModel().getSelectedItem().getSongName()
+                                + "\nArtist: " + listView.getSelectionModel().getSelectedItem().getArtist()
+                                + "\nAlbum: " + listView.getSelectionModel().getSelectedItem().getAlbum()
+                                + "\nYear: " + listView.getSelectionModel().getSelectedItem().getYear();
+                    info.setText(content);
+                }
+                fileExport();
             }
-            else{
-               String content = "Song Name: " + listView.getSelectionModel().getSelectedItem().getSongName()
-                           + "\nArtist: " + listView.getSelectionModel().getSelectedItem().getArtist()
-                           + "\nAlbum: " + listView.getSelectionModel().getSelectedItem().getAlbum()
-                           + "\nYear: " + listView.getSelectionModel().getSelectedItem().getYear();
-                info.setText(content);
-            }
-            fileExport();
         }
     }
 
     @FXML
     void addInfo(MouseEvent event) {
-        Song temp = new Song(songName.getText(), artist.getText(), album.getText(), year.getText());   
-        //checks if both song and artist are filled
+        Song temp = new Song(songName.getText().trim(), artist.getText().trim(), album.getText().trim(), year.getText().trim());   
         String empty = "";
-        if(songName.getText().equals(empty) || artist.getText().equals(empty)){
+        if(songName.getText().trim().equals(empty) || artist.getText().trim().equals(empty)){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
             alert.setContentText("Both song and artist are required.");
@@ -123,16 +130,24 @@ public class Controller1 {
         }
         Boolean exists = false;
         for (Song element : obsList) {
-            if (element.getSongName().equals(songName.getText()) && element.getArtist().equals(artist.getText())){
+            if (element.getSongName().equals(songName.getText().trim()) && element.getArtist().equals(artist.getText().trim())){
                 exists = true;
             }
         }
-        if(exists == false){             
-            obsList.add(temp);
-            FXCollections.sort(obsList, songComparator);    
-            int position = obsList.indexOf(temp);
-            listView.getSelectionModel().select(position);
-            updateInfo();
+        if(exists == false){ 
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setContentText("Do you want to make this change?");
+            Optional <ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                obsList.add(temp);
+                FXCollections.sort(obsList, songComparator);    
+                int position = obsList.indexOf(temp);
+                listView.getSelectionModel().select(position);
+                updateInfo();                
+            }
+            else {
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -140,7 +155,12 @@ public class Controller1 {
             alert.setContentText("Song already exists in library.");
             alert.setHeaderText("Information alert");
             alert.showAndWait();
+            return;
         }
+        songName.clear();
+        artist.clear();
+        album.clear();
+        year.clear();
         fileExport();
     }
 
