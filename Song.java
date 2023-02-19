@@ -1,4 +1,3 @@
-//Christian Bazaz & Taegon Park
 package song;
 
 public class Song {
