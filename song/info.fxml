@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="song.Controller2">
+   <children>
+      <Button fx:id="update" layoutX="224.0" layoutY="193.0" mnemonicParsing="false" onAction="#updateInfo" prefHeight="50.0" prefWidth="349.0" text="Update Info" />
+      <Button fx:id="back" layoutX="487.0" layoutY="342.0" mnemonicParsing="false" onAction="#mainView" prefHeight="39.0" prefWidth="61.0" text="Back" />
+      <TextArea fx:id="text" editable="false" layoutX="22.0" layoutY="56.0" prefHeight="325.0" prefWidth="183.0" />
+      <Text layoutX="25.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song Details" wrappingWidth="85.31640625" />
+      <Text layoutX="225.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song Name" wrappingWidth="69.244140625" />
+      <Text layoutX="412.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist" wrappingWidth="34.828125" />
+      <TextField fx:id="songName" layoutX="223.0" layoutY="56.0" prefHeight="39.0" prefWidth="162.0" />
+      <TextField fx:id="artist" layoutX="410.0" layoutY="56.0" prefHeight="39.0" prefWidth="162.0" />
+      <Text layoutX="225.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album" />
+      <TextField fx:id="album" layoutX="223.0" layoutY="130.0" prefHeight="39.0" prefWidth="162.0" />
+      <Text layoutX="413.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
+      <TextField fx:id="year" layoutX="411.0" layoutY="130.0" prefHeight="39.0" prefWidth="162.0" />
+   </children>
+</AnchorPane>
