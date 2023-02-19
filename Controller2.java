@@ -1,4 +1,3 @@
-//Christian Bazaz & Taegon Park
 package song;
 
 import java.io.BufferedWriter;
@@ -62,7 +61,6 @@ public class Controller2 {
 
     @FXML
     public void updateInfo(ActionEvent event){
-            //checks if both song and artist are filled
             String empty = "";
             if(songName.getText().equals(empty) || artist.getText().equals(empty)){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -72,7 +70,6 @@ public class Controller2 {
                 alert.showAndWait();
                 return;            
             }
-            //checks if song already exists
             Boolean exists = false;
             for (Song element : obsList) {
                 if (element.getSongName().equals(songName.getText()) && element.getArtist().equals(artist.getText())){
@@ -80,7 +77,6 @@ public class Controller2 {
                 }
             }
             if(exists == false){             
-                //updates info
                 currentSong.setSongName(songName.getText());
                 currentSong.setArtist(artist.getText());
                 currentSong.setAlbum(album.getText());
