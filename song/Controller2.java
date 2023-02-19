@@ -3,6 +3,7 @@ package song;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -62,7 +64,7 @@ public class Controller2 {
     @FXML
     public void updateInfo(ActionEvent event){
             String empty = "";
-            if(songName.getText().equals(empty) || artist.getText().equals(empty)){
+            if(songName.getText().trim().equals(empty) || artist.getText().trim().equals(empty)){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setContentText("Both song and artist are required.");
@@ -72,15 +74,23 @@ public class Controller2 {
             }
             Boolean exists = false;
             for (Song element : obsList) {
-                if (element.getSongName().equals(songName.getText()) && element.getArtist().equals(artist.getText())){
-                    exists = true;
+                if (element.getSongName().equals(songName.getText().trim()) && element.getArtist().equals(artist.getText().trim())){                  
+                    if (obsList.indexOf(element) != songIndex){
+                        exists = true;     
+                    }
                 }
             }
             if(exists == false){             
-                currentSong.setSongName(songName.getText());
-                currentSong.setArtist(artist.getText());
-                currentSong.setAlbum(album.getText());
-                currentSong.setYear(year.getText());
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation Dialog");
+                alert.setContentText("Do you want to make this change?");
+                Optional <ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK){
+                    currentSong.setSongName(songName.getText().trim());
+                    currentSong.setArtist(artist.getText().trim());
+                    currentSong.setAlbum(album.getText().trim());
+                    currentSong.setYear(year.getText().trim());
+                }
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
