@@ -1,4 +1,3 @@
-//Christian Bazaz & Taegon Park
 package song;
 
 import java.io.BufferedWriter;
@@ -122,7 +121,6 @@ public class Controller1 {
             alert.showAndWait();
             return;            
         }
-        //checks if song already exists
         Boolean exists = false;
         for (Song element : obsList) {
             if (element.getSongName().equals(songName.getText()) && element.getArtist().equals(artist.getText())){
