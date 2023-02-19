@@ -7,8 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<!-- Christian Bazaz & Taegon Park -->
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="song.Controller1">
    <children>
       <ListView id="list" fx:id="listView" layoutX="20.0" layoutY="39.0" onMouseClicked="#updateInfo" prefHeight="342.0" prefWidth="240.0" />
