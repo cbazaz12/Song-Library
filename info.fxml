@@ -6,8 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<!-- Christian Bazaz & Taegon Park -->
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="song.Controller2">
    <children>
       <Button fx:id="update" layoutX="224.0" layoutY="193.0" mnemonicParsing="false" onAction="#updateInfo" prefHeight="50.0" prefWidth="349.0" text="Update Info" />
